@@ -1,6 +1,6 @@
 # Quote Forensics
 
-A Claude Skill for comparing, diagnosing and rewriting commercial quotations, bids,
+A Skill for comparing, diagnosing and rewriting commercial quotations, bids,
 tenders and vendor proposals.
 
 Most quote comparisons fail the same way: someone lines up three totals, picks the
