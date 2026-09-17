@@ -1,0 +1,42 @@
+{
+  "recommendation": "Aeroflow Systems at INR 47,20,000 normalized — not Cooltech, despite Cooltech's INR 39,83,000 headline.",
+  "confidence": "medium",
+  "conditions": [
+    "Cooltech confirming in writing whether its excluded installation scope can be priced; if it lands materially below INR 5,20,000 the ranking is live again.",
+    "Both Aeroflow and Nordic correcting the arithmetic errors in their own stated totals before any award.",
+    "The AHU make being locked in the order — 'equivalent approved' is not a specification."
+  ],
+  "diagnosis": [
+    {"driver": "Scope inclusion — installation and commissioning", "tag": "E",
+     "quantum": "explains INR 5,20,000, 70.6% of the gap to Aeroflow",
+     "evidence": "Cooltech excludes installation, commissioning and testing & balancing (p.2: 'Technical supervision during client-arranged erection'); Aeroflow and Nordic both include them. Cooltech is not INR 7,37,000 cheaper — it is cheaper by whatever erection costs minus INR 85,000.",
+     "action": "Obtain Cooltech's installed price, or a firm quote from an erection contractor, before comparing anything else."},
+    {"driver": "Specification tier — AHU make", "tag": "I",
+     "quantum": "likely explains INR 2,68,000, 36.4% of the gap; medium confidence",
+     "evidence": "Aeroflow and Nordic name a premium make; Cooltech states only 'equivalent approved'. Inferred from the price pattern across the equipment line, not from a stated specification — no vendor supplied a make/model sheet.",
+     "action": "Lock the make and model in the tender and re-price. This is the single highest-yield question available."},
+    {"driver": "Piping rate outlier", "tag": "E",
+     "quantum": "moves INR 2,08,000 the other way, -28.2% of the gap",
+     "evidence": "Cooltech's chilled water piping is INR 2,750/rm against INR 2,100 and INR 2,050 from the other two — 19.6% above the cross-vendor mean on an identically-described line.",
+     "action": "Cooltech is low on equipment and high on piping. Ask for rate justification; if quantities grow on site, this rate is where the money leaves."},
+    {"driver": "Stated-total arithmetic", "tag": "E",
+     "quantum": "Aeroflow overstates by INR 78,000; Nordic understates by INR 1,10,000",
+     "evidence": "Both vendors' grand totals disagree with the sum of their own line items. Recomputed from their rates and quantities.",
+     "action": "Raise before negotiating anything else. Which figure they stand behind changes the comparison."},
+    {"driver": "Payment and warranty terms", "tag": "E",
+     "quantum": "not in the price, material to value",
+     "evidence": "Cooltech asks 50% advance with 12-month warranty and a 15-day validity carrying an escalation clause. Nordic asks 20% advance with 36-month warranty and 60-day validity. Aeroflow sits between.",
+     "action": "Price the warranty gap over the horizon. Cooltech's 15-day validity plus escalation clause is a repricing option held against you on a 70-day lead time."},
+    {"driver": "Margin and overhead loading", "tag": "U",
+     "quantum": "not determinable",
+     "evidence": "No vendor supplied a cost build-up and no benchmark file was provided. Any claim about which vendor is carrying more margin would be invented.",
+     "action": "Request rate analysis for the top three lines by value. Refusal is itself informative."}
+  ],
+  "next_actions": [
+    "Issue the ask-list to all three vendors with a common response deadline and a fixed response format.",
+    "Lock the AHU make and model before re-pricing; re-tender that line only.",
+    "Obtain Cooltech's installed price or drop them from the comparison — as quoted they are answering a different question.",
+    "Get both arithmetic mismatches confirmed in writing.",
+    "Re-run the comparison once responses land; the residual is zero now, so any movement will be traceable to a specific line."
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "comparison": {
+    "title": "HVAC package — 3 vendor comparison, Nerul warehouse fit-out",
+    "mode": "buyer",
+    "domain": "boq",
+    "currency": "INR",
+    "tax_basis": "ex_tax",
+    "tax_creditable": true,
+    "cost_of_capital_pct": 12,
+    "materiality_pct": 1.0,
+    "weights": {
+      "price": 45, "scope_completeness": 15, "delivery": 10,
+      "commercial_risk": 15, "capability": 10, "terms": 5
+    }
+  },
+  "quotes": [
+    {
+      "vendor": "Aeroflow Systems",
+      "quote_ref": "AFS/2026/0412",
+      "quote_date": "2026-08-28",
+      "validity_days": 30,
+      "currency": "INR",
+      "stated_total": 4820000,
+      "stated_total_basis": "ex_tax",
+      "lead_time_days": 45,
+      "payment_terms": [
+        {"label": "advance", "pct": 30, "month_offset": 0},
+        {"label": "on delivery", "pct": 60, "month_offset": 2},
+        {"label": "on commissioning", "pct": 10, "month_offset": 3}
+      ],
+      "inclusions": ["Freight to site", "Installation", "Commissioning", "Testing & balancing"],
+      "exclusions": ["Electrical supply up to panel"],
+      "risk_terms": {"warranty_months": 24, "retention_pct": 5, "ld_rate": "0.5%/week, cap 5%"},
+      "lines": [
+        {"map_key": "AHU units", "description": "Air handling units 10TR, premium make",
+         "qty": 4, "uom": "no", "rate": 465000, "amount": 1860000, "category": "Equipment",
+         "provenance": {"verbatim": "Supply of Air Handling Units, 10TR capacity, make: as specified premium brand", "page": "2", "row": "1"}},
+        {"map_key": "Ducting", "description": "GI ducting incl. insulation",
+         "qty": 2400, "uom": "sqm", "rate": 640, "amount": 1536000, "category": "Distribution",
+         "provenance": {"verbatim": "GI sheet metal ducting with 25mm nitrile insulation, rate per sqm of duct surface", "page": "2", "row": "4"}},
+        {"map_key": "Piping and valves", "description": "Chilled water piping",
+         "qty": 320, "uom": "rm", "rate": 2100, "amount": 672000, "category": "Distribution",
+         "provenance": {"verbatim": "MS chilled water piping with insulation, valves and fittings", "page": "3", "row": "2"}},
+        {"map_key": "Installation and commissioning", "description": "Erection, T&B",
+         "qty": 1, "uom": "LS", "rate": 520000, "amount": 520000, "category": "Services",
+         "provenance": {"verbatim": "Erection, installation, testing and balancing — lump sum", "page": "3", "row": "7"}},
+        {"map_key": "Freight", "description": "Freight to site",
+         "qty": 1, "uom": "LS", "rate": 132000, "amount": 132000, "category": "Logistics",
+         "provenance": {"verbatim": "Transportation to site, inclusive of unloading", "page": "3", "row": "9"}},
+        {"map_key": "Controls and BMS interface", "description": "BMS interface",
+         "qty": 1, "uom": "LS", "rate": 100000, "amount": 100000, "category": "Controls",
+         "kind": "provisional",
+         "provenance": {"verbatim": "BMS interface — provisional sum, subject to final BMS scope", "page": "4", "row": "1"}}
+      ]
+    },
+    {
+      "vendor": "Cooltech Engineering",
+      "quote_ref": "CTE-Q-8841",
+      "quote_date": "2026-08-30",
+      "validity_days": 15,
+      "currency": "INR",
+      "stated_total": 3990000,
+      "stated_total_basis": "ex_tax",
+      "lead_time_days": 70,
+      "payment_terms": [
+        {"label": "advance", "pct": 50, "month_offset": 0},
+        {"label": "on delivery", "pct": 50, "month_offset": 3}
+      ],
+      "inclusions": ["Freight to site"],
+      "exclusions": ["Installation", "Commissioning", "Testing & balancing", "Electrical supply up to panel"],
+      "risk_terms": {"warranty_months": 12, "retention_pct": 0, "escalation": "Prices subject to revision after 15 days"},
+      "lines": [
+        {"map_key": "AHU units", "description": "AHU 10TR equivalent make",
+         "qty": 4, "uom": "no", "rate": 398000, "amount": 1592000, "category": "Equipment",
+         "provenance": {"verbatim": "Supply of AHU 10TR — make: equivalent approved", "page": "1", "row": "1"}},
+        {"map_key": "Ducting", "description": "GI ducting",
+         "qty": 2400, "uom": "sqm", "rate": 590, "amount": 1416000, "category": "Distribution",
+         "provenance": {"verbatim": "GI ducting with insulation as per spec", "page": "1", "row": "3"}},
+        {"map_key": "Piping and valves", "description": "CHW piping",
+         "qty": 320, "uom": "rm", "rate": 2750, "amount": 880000, "category": "Distribution",
+         "provenance": {"verbatim": "Chilled water piping complete with valves", "page": "2", "row": "1"}},
+        {"map_key": "Freight", "description": "Freight",
+         "qty": 1, "uom": "LS", "rate": 95000, "amount": 95000, "category": "Logistics",
+         "provenance": {"verbatim": "Freight up to site gate. Unloading in client scope.", "page": "2", "row": "4"}},
+        {"map_key": "Site supervision", "description": "Supervision only",
+         "qty": 1, "uom": "LS", "rate": 85000, "amount": 85000, "category": "Services",
+         "quarantine": true,
+         "quarantine_reason": "Supervision only, not installation — not comparable to A and C's installed scope",
+         "provenance": {"verbatim": "Technical supervision during client-arranged erection", "page": "2", "row": "6"}}
+      ]
+    },
+    {
+      "vendor": "Nordic Climate Pvt Ltd",
+      "quote_ref": "NCPL/26/1190",
+      "quote_date": "2026-09-02",
+      "validity_days": 60,
+      "currency": "INR",
+      "stated_total": 5010000,
+      "stated_total_basis": "ex_tax",
+      "lead_time_days": 40,
+      "payment_terms": [
+        {"label": "advance", "pct": 20, "month_offset": 0},
+        {"label": "on delivery", "pct": 65, "month_offset": 2},
+        {"label": "on commissioning", "pct": 15, "month_offset": 3}
+      ],
+      "inclusions": ["Freight to site", "Installation", "Commissioning", "Testing & balancing", "Operator training"],
+      "exclusions": ["Electrical supply up to panel"],
+      "risk_terms": {"warranty_months": 36, "retention_pct": 5, "ld_rate": "0.5%/week, cap 10%"},
+      "lines": [
+        {"map_key": "AHU units", "description": "AHU 10TR premium",
+         "qty": 4, "uom": "no", "rate": 488000, "amount": 1952000, "category": "Equipment",
+         "provenance": {"verbatim": "Air Handling Units 10TR, premium imported make, 3 year warranty", "page": "2", "row": "1"}},
+        {"map_key": "Ducting", "description": "GI ducting insulated",
+         "qty": 2400, "uom": "sqm", "rate": 615, "amount": 1476000, "category": "Distribution",
+         "provenance": {"verbatim": "GI ducting, 25mm insulation, factory fabricated", "page": "2", "row": "3"}},
+        {"map_key": "Piping and valves", "description": "CHW piping",
+         "qty": 320, "uom": "rm", "rate": 2050, "amount": 656000, "category": "Distribution",
+         "provenance": {"verbatim": "Chilled water piping with insulation, valves, hangers", "page": "3", "row": "1"}},
+        {"map_key": "Installation and commissioning", "description": "Install + commission",
+         "qty": 1, "uom": "LS", "rate": 610000, "amount": 610000, "category": "Services",
+         "provenance": {"verbatim": "Complete erection, installation, commissioning, testing & balancing", "page": "3", "row": "5"}},
+        {"map_key": "Freight", "description": "Freight and unloading",
+         "qty": 1, "uom": "LS", "rate": 141000, "amount": 141000, "category": "Logistics",
+         "provenance": {"verbatim": "Transport, unloading and shifting to location", "page": "3", "row": "8"}},
+        {"map_key": "Operator training", "description": "Training",
+         "qty": 1, "uom": "LS", "rate": 65000, "amount": 65000, "category": "Services",
+         "provenance": {"verbatim": "Two-day operator training for client facilities team", "page": "4", "row": "2"}}
+      ]
+    }
+  ],
+  "assumptions": [
+    {"text": "Ducting quantity of 2400 sqm taken as the client BOQ figure for all three vendors.",
+     "impact_if_wrong": "Ducting is ~30% of value; a 10% quantity error moves the gap by roughly INR 1.5L.",
+     "affects": ["Ducting"]},
+    {"text": "Cooltech's excluded installation valued at Aeroflow's rate for the purpose of the ledger, not added to the ranked total.",
+     "impact_if_wrong": "If the client's own erection contractor is cheaper, Cooltech's true gap narrows.",
+     "affects": ["Installation and commissioning"]},
+    {"text": "GST assumed fully creditable to the buyer and therefore excluded from the comparison basis.",
+     "impact_if_wrong": "If credit is unavailable, all totals rise proportionately but the ranking is unchanged.",
+     "affects": ["all"]}
+  ]
+}

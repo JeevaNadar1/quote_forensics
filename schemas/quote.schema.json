@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/quote-forensics/schemas/quote.schema.json",
+  "title": "Quote Forensics — quote intake",
+  "description": "One object per comparison run. Every line item must carry provenance; the skill refuses to compare lines without it.",
+  "type": "object",
+  "required": ["comparison", "quotes"],
+  "properties": {
+    "comparison": {
+      "type": "object",
+      "required": ["title", "mode", "currency"],
+      "properties": {
+        "title": { "type": "string" },
+        "mode": { "enum": ["buyer", "seller", "audit"] },
+        "domain": { "enum": ["boq", "saas", "goods", "services", "general"], "default": "general" },
+        "currency": { "type": "string", "description": "ISO code of the comparison currency, e.g. INR" },
+        "fx_rates": {
+          "type": "object",
+          "description": "Source currency -> rate into comparison currency. Required if any quote uses another currency.",
+          "additionalProperties": { "type": "number" }
+        },
+        "fx_date": { "type": "string", "format": "date" },
+        "tax_basis": { "enum": ["ex_tax", "inc_tax"], "default": "ex_tax" },
+        "tax_creditable": { "type": "boolean", "default": true },
+        "horizon_months": { "type": "integer", "minimum": 1, "description": "Required for subscription or life-cycle comparisons." },
+        "cost_of_capital_pct": { "type": "number", "description": "Annual %, used to value payment terms. Omit to skip term valuation." },
+        "materiality_pct": { "type": "number", "default": 1.0 },
+        "weights": {
+          "type": "object",
+          "description": "Scoring weights, must sum to 100. Omit to use the fallback rubric.",
+          "additionalProperties": { "type": "number" }
+        }
+      }
+    },
+    "quotes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["vendor", "lines"],
+        "properties": {
+          "vendor": { "type": "string" },
+          "source_file": { "type": "string" },
+          "quote_ref": { "type": "string" },
+          "quote_date": { "type": "string", "format": "date" },
+          "validity_days": { "type": "integer" },
+          "currency": { "type": "string" },
+          "stated_total": { "type": "number", "description": "The vendor's own total, verbatim. Never used as an output — only reconciled against." },
+          "stated_total_basis": { "enum": ["ex_tax", "inc_tax"] },
+          "incoterm": { "type": "string" },
+          "lead_time_days": { "type": "integer" },
+          "payment_terms": {
+            "type": "array",
+            "description": "Payment schedule as milestones.",
+            "items": {
+              "type": "object",
+              "required": ["pct"],
+              "properties": {
+                "label": { "type": "string" },
+                "pct": { "type": "number" },
+                "month_offset": { "type": "number", "default": 0 }
+              }
+            }
+          },
+          "inclusions": { "type": "array", "items": { "type": "string" } },
+          "exclusions": { "type": "array", "items": { "type": "string" } },
+          "risk_terms": {
+            "type": "object",
+            "properties": {
+              "warranty_months": { "type": "integer" },
+              "liability_cap": { "type": "string" },
+              "ld_rate": { "type": "string" },
+              "retention_pct": { "type": "number" },
+              "escalation": { "type": "string" }
+            }
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["map_key", "description", "provenance"],
+              "properties": {
+                "map_key": {
+                  "type": "string",
+                  "description": "Stable comparison label shared across vendors. This is what levels the quotes; choose it during NORMALIZE, never during INTAKE."
+                },
+                "description": { "type": "string", "description": "The vendor's wording, lightly trimmed." },
+                "qty": { "type": "number" },
+                "uom": { "type": "string" },
+                "rate": { "type": "number" },
+                "amount": { "type": "number", "description": "Vendor-stated amount. Recomputed and diffed, never trusted." },
+                "tax_pct": { "type": "number" },
+                "category": { "type": "string", "description": "Trade, section or cost group, for sectional reporting." },
+                "kind": {
+                  "enum": ["firm", "provisional", "optional", "allowance"],
+                  "default": "firm",
+                  "description": "Non-firm lines are stripped from ranked totals and reported as exposure."
+                },
+                "map_type": { "enum": ["one_to_one", "many_to_one", "one_to_none", "fuzzy"], "default": "one_to_one" },
+                "confidence": { "enum": ["high", "medium", "low"], "default": "high" },
+                "quarantine": { "type": "boolean", "default": false },
+                "quarantine_reason": { "type": "string" },
+                "provenance": {
+                  "type": "object",
+                  "required": ["verbatim"],
+                  "description": "Mandatory. The skill will not compare a line it cannot trace back to source text.",
+                  "properties": {
+                    "verbatim": { "type": "string", "description": "The vendor's original line text, unparaphrased." },
+                    "page": { "type": "string" },
+                    "row": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "description": "Every assumption made while levelling. Printed in output, never buried.",
+      "items": {
+        "type": "object",
+        "required": ["text"],
+        "properties": {
+          "text": { "type": "string" },
+          "impact_if_wrong": { "type": "string" },
+          "affects": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}
