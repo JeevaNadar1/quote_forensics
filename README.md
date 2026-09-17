@@ -1,6 +1,6 @@
 # Quote Forensics
 
-A Skill for comparing, diagnosing and rewriting commercial quotations, bids,
+A Claude Skill for comparing, diagnosing and rewriting commercial quotations, bids,
 tenders and vendor proposals.
 
 Most quote comparisons fail the same way: someone lines up three totals, picks the
@@ -52,22 +52,40 @@ total, the skill **refuses to rank** and issues a question list instead. A ranki
 
 ## Install
 
-**Claude.ai / Claude Desktop** — upload `quote-forensics.skill` in Settings → Capabilities → Skills.
+**Claude.ai / Claude Desktop** — download `quote-forensics.skill` from the
+[latest release](https://github.com/JeevaNadar1/quote_forensics/releases), then upload it
+in Settings → Capabilities → Skills.
 
-**Claude Code** — clone into your skills directory:
+To build the bundle yourself from source:
 
 ```bash
-git clone https://github.com/<you>/quote-forensics.git ~/.claude/skills/quote-forensics
+make bundle          # writes dist/quote-forensics.skill
+```
+
+**Claude Code** — clone into your skills directory. The directory name must be
+`quote-forensics`, matching the `name:` field in `SKILL.md`:
+
+```bash
+git clone https://github.com/JeevaNadar1/quote_forensics.git ~/.claude/skills/quote-forensics
 ```
 
 **Standalone** — the scripts run without Claude:
 
 ```bash
-pip install openpyxl reportlab
-python3 scripts/normalize.py  examples/sample_quotes.json -o normalized.json
-python3 scripts/variance.py   normalized.json             -o variance.json
-python3 scripts/build_xlsx.py normalized.json variance.json -o comparison.xlsx
-python3 scripts/build_pdf.py  normalized.json variance.json --verdict verdict.json -o comparison.pdf
+pip install -r requirements.txt
+
+python3 scripts/normalize.py  examples/sample_quotes.json   -o examples/normalized.json
+python3 scripts/variance.py   examples/normalized.json      -o examples/variance.json
+python3 scripts/build_xlsx.py examples/normalized.json examples/variance.json \
+        -o examples/comparison.xlsx
+python3 scripts/build_pdf.py  examples/normalized.json examples/variance.json \
+        --verdict examples/verdict.json -o examples/comparison.pdf
+```
+
+Or run the whole chain at once:
+
+```bash
+make test
 ```
 
 ---
@@ -115,11 +133,36 @@ quote-forensics/
 │   ├── variance.py               contribution ranking, outliers, weighted scoring
 │   ├── build_xlsx.py             7-sheet Excel model with live formulas
 │   └── build_pdf.py              A4 print-ready report
-└── examples/                     worked 3-vendor comparison, end to end
+├── examples/                     worked 3-vendor comparison, end to end
+├── requirements.txt              openpyxl, reportlab — the only third-party deps
+├── Makefile                      make bundle / make test / make clean
+└── .github/workflows/ci.yml      pipeline run, referenced-path check, bundle check
 ```
 
 Progressive disclosure: `SKILL.md` is the only file always loaded. References load on
 demand, domain packs only on domain match.
+
+---
+
+## Development
+
+The working tree is the single source of truth. `quote-forensics.skill` is a **build
+artefact**, produced by `make bundle` and published on releases. It is not committed, so it
+cannot drift out of sync with the files it packages.
+
+CI enforces three things on every push:
+
+1. The four-stage pipeline runs clean on Python 3.10 and 3.12 and emits non-trivial output.
+2. Every path named in `SKILL.md` or `README.md` actually exists in the tree. This is the
+   check that catches the one structural failure mode of a progressive-disclosure skill —
+   a reference pointing at a file that was never committed.
+3. The rebuilt bundle contains every source file in the tree.
+
+```bash
+make test      # run the pipeline against the worked example
+make bundle    # rebuild dist/quote-forensics.skill from the tree
+make clean     # remove generated artefacts
+```
 
 ---
 
@@ -162,4 +205,4 @@ demand, domain packs only on domain match.
 
 ## License
 
-MIT.
+MIT. See [LICENSE](LICENSE).
